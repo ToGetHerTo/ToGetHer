@@ -603,8 +603,7 @@ public class hbase_api {
      * @param value
      * @throws Exception
      */
-    public static void scanSingleColumnValueFilter (String tab,String family,String column,
-                                                    final CompareOperator op, String[][] value) throws Exception{
+    public static void scanSingleColumnValueFilter (String tab,String family,String column, final CompareOperator op, String[][] value) throws Exception{
         Table table = getTab(tab);
 
         Scan scan = new Scan();
