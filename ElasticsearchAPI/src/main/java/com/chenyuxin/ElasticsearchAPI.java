@@ -1,5 +1,6 @@
 package com.chenyuxin;
 
+import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.get.MultiGetItemResponse;
@@ -9,20 +10,21 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.Requests;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.common.xcontent.XContent;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -31,7 +33,8 @@ import java.util.concurrent.ExecutionException;
  * @create 2019-06-03 13:58
  */
 
-public class GetClient {
+@SuppressWarnings("all")
+public class ElasticsearchAPI {
     private TransportClient client;
     /**
      * 创建 Transpot Client客户端的链接
@@ -265,9 +268,122 @@ public class GetClient {
      */
     public void matchAllQuery(){
         //执行查询
-        SearchResponse searchResponse = client.prepareSearch("").setTypes()
+        SearchResponse searchResponse = client.prepareSearch("索引名(切记必须小写").setTypes("类型(大小写都可以)")
                 .setQuery(QueryBuilders.matchAllQuery()).get();
-        //
+        //打印查询结果
+        //获取命中次数，查询结果有多少对象
+        SearchHits hits = searchResponse.getHits();
+        System.out.println("查询结果有"+hits.getTotalHits()+"条");
+        //遍历打印查询结果
+        Iterator<SearchHit> iterator = hits.iterator();
+        while (iterator.hasNext()){
+            //每个查询对象
+            SearchHit searchHit = iterator.next();
+            //获取字符串格式打印
+            System.out.println(searchHit.getSourceAsString());
+        }
+        //关闭链接
+        client.close();
+    }
+
+    /**
+     * 对所有字段分词查询
+     *      querystringquery
+     */
+    public void queryStringQuery(){
+        //条件查询
+        SearchResponse searchResponse = client.prepareSearch("索引名(切记必须小写").setTypes("类型(大小写都可以)")
+                .setQuery(QueryBuilders.queryStringQuery("全文")).get();
+        //打印查询结果
+        //获取命中的次数，查询结果有多少对象
+        SearchHits hits = searchResponse.getHits();
+        System.out.println("查询结果有"+hits.getTotalHits()+"条");
+        //遍历打印查询结果
+        Iterator<SearchHit> iterator = hits.iterator();
+        while (iterator.hasNext()){
+            //每个查询对象
+            SearchHit searchHit = iterator.next();
+            //获取字符串格式打印
+            System.out.println(searchHit.getSourceAsString());
+        }
+        //关闭链接
+        client.close();
+
+    }
+
+    /**
+     * 词条查询
+     */
+    public void termQuery(){
+        //第一field查询
+        SearchResponse searchResponse = client.prepareSearch("索引名(切记必须小写").setTypes("类型(大小写都可以)")
+                .setQuery(QueryBuilders.termQuery("content","全文")).get();
+        //打印查询结果
+        //获取命中的次数，查询结果有多少对象
+        SearchHits hits = searchResponse.getHits();
+        System.out.println("查询结果有"+hits.getTotalHits()+"条");
+        //遍历打印查询结果
+        Iterator<SearchHit> iterator = hits.iterator();
+        while (iterator.hasNext()){
+            //每个查询对象
+            SearchHit searchHit = iterator.next();
+            //获取字符串格式打印
+            System.out.println(searchHit.getSourceAsString());
+        }
+        //关闭链接
+        client.close();
+    }
+
+    /**
+     * 通配符查询
+     */
+    public void wildcardQuery(){
+        //通配符查询
+        SearchResponse searchResponse = client.prepareSearch("索引名(切记必须小写").setTypes("类型(大小写都可以)")
+                .setQuery(QueryBuilders.wildcardQuery("content","*全文*")).get();
+        //打印查询结果
+        //获取命中的次数，查询结果有多少对象
+        SearchHits hits = searchResponse.getHits();
+        System.out.println("查询结果有"+hits.getTotalHits()+"条");
+        //遍历打印查询结果
+        Iterator<SearchHit> iterator = hits.iterator();
+        while (iterator.hasNext()){
+            //每个查询对象
+            SearchHit searchHit = iterator.next();
+            //获取字符串格式打印
+            System.out.println(searchHit.getSourceAsString());
+        }
+        //关闭链接
+        client.close();
+    }
+
+    /**
+     * 映射相关操作
+     */
+    public void createMapping() throws IOException, ExecutionException, InterruptedException {
+        //设置mapping
+        XContentBuilder builder = XContentFactory.jsonBuilder()
+                .startObject("索引")
+                    .startObject("article")
+                        .startObject("properties")
+                            .startObject("id1")
+                                .field("type","text")
+                                .endObject()
+                            .startObject("title2")
+                                .field("type","text")
+                                .endObject()
+                            .startObject("content")
+                                .field("type","text")
+                                .endObject()
+                        .endObject()
+                    .endObject()
+                .endObject();
+        //添加mapping
+        PutMappingRequest putMappingRequest = Requests.putMappingRequest("索引").type("article").source(builder);
+        client.admin().indices().putMapping(putMappingRequest).get();
+        //关闭资源
+        client.close();
+
     }
 }
 
