@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/API.iml" filepath="$PROJECT_DIR$/API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ElasticsearchAPI/ElasticsearchAPI.iml" filepath="$PROJECT_DIR$/ElasticsearchAPI/ElasticsearchAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HBaseAPI/HBaseAPI.iml" filepath="$PROJECT_DIR$/HBaseAPI/HBaseAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HBaseAPI/HBaseAPI_1/HBaseAPI_1.iml" filepath="$PROJECT_DIR$/HBaseAPI/HBaseAPI_1/HBaseAPI_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HBaseAPI/HBaseAPI_2/HBaseAPI_2.iml" filepath="$PROJECT_DIR$/HBaseAPI/HBaseAPI_2/HBaseAPI_2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KafkaAPI/KafkaAPI.iml" filepath="$PROJECT_DIR$/KafkaAPI/KafkaAPI.iml" />
+    </modules>
+  </component>
+</project>

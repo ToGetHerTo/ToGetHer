@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ElasticsearchAPI" />
+        <module name="HBaseAPI_2" />
+        <module name="API" />
+        <module name="HBaseAPI_1" />
+        <module name="KafkaAPI" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="API" target="1.5" />
+      <module name="ElasticsearchAPI" target="1.5" />
+      <module name="HBaseAPI" target="1.5" />
+      <module name="HBaseAPI_1" target="1.5" />
+      <module name="HBaseAPI_2" target="1.5" />
+      <module name="KafkaAPI" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
