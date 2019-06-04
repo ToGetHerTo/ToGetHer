@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ElasticsearchAPI" />
-        <module name="HBaseAPI_1" />
-        <module name="HBaseAPI_2" />
-        <module name="KafkaAPI" />
+        <module name="HBaseAPI" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="HBaseAPI" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
