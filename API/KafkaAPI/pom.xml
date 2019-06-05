@@ -25,6 +25,13 @@
             <artifactId>kafka_2.12</artifactId>
             <version>${kafka_version}</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <!-- 必须加jdk的版本号,但是好像只能是15其余一直报错 -->
+            <classifier>jdk15</classifier>
+        </dependency>
     </dependencies>
 
     <build>

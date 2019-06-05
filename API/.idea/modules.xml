@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/HBaseAPI/HBaseAPI_1/HBaseAPI_1.iml" filepath="$PROJECT_DIR$/HBaseAPI/HBaseAPI_1/HBaseAPI_1.iml" />
       <module fileurl="file://$PROJECT_DIR$/HBaseAPI/HBaseAPI_2/HBaseAPI_2.iml" filepath="$PROJECT_DIR$/HBaseAPI/HBaseAPI_2/HBaseAPI_2.iml" />
       <module fileurl="file://$PROJECT_DIR$/KafkaAPI/KafkaAPI.iml" filepath="$PROJECT_DIR$/KafkaAPI/KafkaAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Realtime/Realtime.iml" filepath="$PROJECT_DIR$/Realtime/Realtime.iml" />
     </modules>
   </component>
 </project>
