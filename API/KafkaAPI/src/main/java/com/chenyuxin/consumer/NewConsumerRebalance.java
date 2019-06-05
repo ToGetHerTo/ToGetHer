@@ -11,10 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author chenshiliu
  * @create 2019-06-05 15:58
- */
-
-/*
-    kafka提供了这个监听来处理分区的变化，区分被取消时调用onPartitionsRevoked方法；分区被分配时调用onPartitionsAssigned
+ * kafka提供了这个监听来处理分区的变化，
+ *      区分被取消时调用onPartitionsRevoked方法，
+ *      分区被分配时调用onPartitionsAssigned方法。
  */
 @SuppressWarnings("all")
 public class NewConsumerRebalance implements ConsumerRebalanceListener {

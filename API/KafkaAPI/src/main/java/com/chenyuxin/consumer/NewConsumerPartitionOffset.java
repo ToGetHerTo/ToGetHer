@@ -14,14 +14,14 @@ import java.util.Properties;
 /**
  * @author chenshiliu
  * @create 2019-06-04 18:01
+ * 手动提交偏移量----按分区提交
+ *      更细粒度的提交数据，按照每个分区手动提交偏移量，这里实现了按照分区取数据，因此可以从分区入手，不同的分区可以做不同的操作，
+ *      可以灵活实现一些功能，为了验证手动提交偏移量，有两种方式：
+ *          1.debug的时候，在poll数据之后，手动提交前偏移量之前终止程序，再次启动看数据是否重复被拉取
+ *          2.debug的时候，在poll数据之后，手动提交前偏移量之前终止程序，登录Linux 主机执行如下命令：
+ *          kafka-consumer-groups.sh --bootstrap-server hadoop01:9092 --describe --group my_group
  */
 @SuppressWarnings("all")
-// 偏移量手动按分区提交
-//更细粒度的提交数据，按照每个分区手动提交偏移量，这里实现了按照分区取数据，因此可以从分区入手，不同的分区可以做不同的操作，
-// 可以灵活实现一些功能，为了验证手动提交偏移量，有两种方式：
-// 1.debug的时候，在poll数据之后，手动提交前偏移量之前终止程序，再次启动看数据是否重复被拉取
-// 2.debug的时候，在poll数据之后，手动提交前偏移量之前终止程序，登录Linux 主机执行如下命令：
-//      kafka-consumer-groups.sh --bootstrap-server hadoop01:9092 --describe --group my_group
 public class NewConsumerPartitionOffset {
     public void munualCommitByPartition() {
         Properties properties = new Properties();

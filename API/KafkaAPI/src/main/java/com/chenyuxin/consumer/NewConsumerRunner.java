@@ -4,8 +4,6 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
-import org.junit.Test;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,9 +18,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * @author chenshiliu
  * @create 2019-06-05 10:27
+ * Kafka是线程不安全的，kafka官方提供了一种写法来避免线程安全问题
  */
 @SuppressWarnings("all")
-//Kafka是线程不安全的，kafka官方提供了一种写法来避免线程安全问题
 public class NewConsumerRunner implements Runnable {
 
     private final AtomicBoolean closed = new AtomicBoolean(false);
@@ -63,8 +61,7 @@ public class NewConsumerRunner implements Runnable {
         closed.set(true);
         consumer.wakeup();
     }
-    //驱动放啊
-    @Test
+    //驱动方法
     public void autoCommitParallelTest() {
         Properties properties = new Properties();
         //设置kafka集群的地址
