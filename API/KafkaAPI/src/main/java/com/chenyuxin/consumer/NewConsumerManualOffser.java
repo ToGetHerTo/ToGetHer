@@ -12,11 +12,11 @@ import java.util.Properties;
 /**
  * @author chenshiliu
  * @create 2019-06-04 17:45
+ * 手动提交偏移量----按消费者提交
+ *      通常从Kafka拿到的消息是要做业务处理，而且业务处理完成才算真正消费成功，所以需要客户端控制offset提交时间
  */
 @SuppressWarnings("all")
-// 偏移量手动按消费者提交
-// 通常从Kafka拿到的消息是要做业务处理，而且业务处理完成才算真正消费成功，所以需要客户端控制offset提交时间
-public class NewConsumerOffser {
+public class NewConsumerManualOffser {
     public void munualCommit() {
         Properties properties = new Properties();
         //设置kafka集群的地址

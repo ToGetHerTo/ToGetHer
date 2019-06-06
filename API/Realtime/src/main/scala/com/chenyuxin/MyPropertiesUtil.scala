@@ -1,3 +1,5 @@
+package com.chenyuxin
+
 import java.io.InputStreamReader
 import java.util.Properties
 

@@ -10,10 +10,10 @@ import java.util.Properties;
 /**
  * @author chenshiliu
  * @create 2019-06-04 15:48
+ * 自动提交offset
  */
 @SuppressWarnings("all")
-//自动提交offset
-public class NewConsumer {
+public class NewConsumerAutoOffset {
     public static void main(String[] args) {
         Properties properties = new Properties();
         //定义kafka服务的地址，不需要将所有broker指定上

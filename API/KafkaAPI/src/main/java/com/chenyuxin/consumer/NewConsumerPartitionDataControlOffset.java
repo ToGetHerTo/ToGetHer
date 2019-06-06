@@ -14,16 +14,14 @@ import java.util.Properties;
 /**
  * @author chenshiliu
  * @create 2019-06-04 19:05
+ * 消费只读取特定分区数据-手动更改偏移量
+ *      kafka Consumer Api还提供了自己存储offset的功能，将offset和data做到原子性，
+ *      可以让消费具有Exactly Once 的语义，比kafka默认的At-least Once更强大
+ *      设置消费者从自定义的位置开始拉取数据，比如从程序停止时已消费的下一Offset开始拉取数据，
+ *      使用这个功能要求data和offset的update操作是原子的，否则可能会破坏数据一致性
  */
 @SuppressWarnings("all")
-/*
- ​kafka Consumer Api还提供了自己存储offset的功能，将offset和data做到原子性，
- 可以让消费具有Exactly Once 的语义，比kafka默认的At-least Once更强大
- 消费者从指定分区拉取数据-手动更改偏移量
- ​设置消费者从自定义的位置开始拉取数据，比如从程序停止时已消费的下一Offset开始拉取数据，
- 使用这个功能要求data和offset的update操作是原子的，否则可能会破坏数据一致性
- */
-public class NewConsumerControlOffset {
+public class NewConsumerPartitionDataControlOffset {
     /*
          手动设置指定分区的offset，只适用于使用Consumer.assign方法添加主题的分区，不适用于kafka自动管理消费者组中的消费者场景，
          后面这种场景可以使用ConsumerRebalanceListener做故障恢复使用
